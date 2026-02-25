@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Vittu Ramadasu Darshan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f8f9fc;
+      --card-bg: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #4f46e5;
+      --accent-2: #0ea5e9;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 8px 40px rgba(15, 23, 42, 0.12);
+      --transition: 0.35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0f1e;
+      --bg-alt: #0d1424;
+      --card-bg: #111827;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #1e293b;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(10, 15, 30, 0.88);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.07);
+    }
+
+    nav a.active {
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.1);
+      font-weight: 700;
+    }
+
+    .nav-resume {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff !important;
+      padding: 7px 18px !important;
+      border-radius: 999px !important;
+      font-weight: 600 !important;
+    }
+
+    .nav-resume:hover {
+      opacity: 0.88;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      margin-left: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      padding: 4px;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 5%;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 999;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.07);
+    }
+
+    .mobile-nav a.active {
+      color: var(--accent);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 140px 5% 80px;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section {
+      padding: 80px 5% 120px;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.35s;
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    .project-card:hover {
+      border-color: rgba(79, 70, 229, 0.45);
+      box-shadow: 0 12px 48px rgba(79, 70, 229, 0.18);
+      transform: translateY(-4px);
+    }
+
+    .project-card.from-left {
+      transform: translateX(-60px);
+    }
+
+    .project-card.from-right {
+      transform: translateX(60px);
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0) !important;
+      transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1), border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card.visible:hover {
+      transform: translateY(-4px) !important;
+    }
+
+    .project-visual {
+      position: relative;
+      min-height: 260px;
+      overflow: hidden;
+    }
+
+    .project-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+
+    .project-body {
+      padding: 36px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 0.97rem;
+      margin-bottom: 22px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(79, 70, 229, 0.08);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .proj-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+
+    .proj-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-gh {
+      background: #24292e;
+      color: #fff;
+    }
+
+    [data-theme="dark"] .btn-gh {
+      background: #30363d;
+    }
+
+    .btn-demo {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 48px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .footer-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .footer-social a {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      transition: color 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      grid-column: 1/-1;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project-visual {
+        min-height: 200px;
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-nav {
+        justify-content: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .projects-section {
+        padding: 60px 5% 80px;
+        gap: 32px;
+      }
+
+      .project-body {
+        padding: 24px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+
+      .proj-btn {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">Vittu Ramadasu Darshan</a>
+    <nav>
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
+          style="margin-right:6px;font-size:.8rem"></i>Resume</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-sun" id="themeIcon"></i>
+    </button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html#about">About</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="#">Resume</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <span class="section-label">Portfolio</span>
+    <h1 class="hero-title">Things I've <span>Built</span></h1>
+    <p class="hero-sub">End-to-end projects spanning ML pipelines, real-time analytics, and enterprise systems — built
+      to solve real problems.</p>
+  </div>
+
+  <!-- PROJECTS -->
+  <div style="background: var(--bg);">
+    <div class="projects-section">
+
+      <!-- Project 1 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\hospital.png"
+            alt="Automated Real Time Hospital Patient Data Analytics Platform on AWS">
+        </div>
+        <div class="project-body">
+          <div class="project-name">Automated Real Time Hospital Patient Data Analytics Platform on AWS</div>
+          <div class="project-desc">Developed automated ETL workflows within cloud-based internal systems using
+            structured project management and stakeholder management supporting change management initiatives,
+            delivering clear business value through faster analytics ensuring data management and accuracy.</div>
+          <div class="project-tags">
+            <span class="tag">AWS (S3, Lambda, Glue, QuickSight)</span>
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/Automated-Real-Time-Hospital-Patient-Data-Analytics-Platform-on-AWS"
+              class="proj-btn btn-gh" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://drive.google.com/file/d/18ky4JtOHXN4Rn7m6v7ZHta9XibPT61UB/view?usp=drive_link"
+              class="proj-btn btn-demo" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live
+              Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card from-left" data-direction="left">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\rag.png" alt="Chronic Care RAG: Diabetes & Hypertension Question Answering">
+        </div>
+        <div class="project-body">
+          <div class="project-name">🩺 Chronic Care RAG: Diabetes & Hypertension Question Answering</div>
+          <div class="project-desc">Built a Retrieval-Augmented Generation (RAG) medical QA system using MiniLM
+            embeddings + FAISS with GPT-2 family models, reducing hallucinations and improving factual grounding for
+            diabetes & hypertension queries and evaluated DistilGPT-2, GPT-2 Medium, and GPT-2 Large under baseline vs
+            RAG settings, showing consistent gains in accuracy, contextual relevance, and response stability, with
+            larger models benefiting most from retrieval.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">HuggingFace</span>
+            <span class="tag">FAISS</span>
+            <span class="tag">MiniLM-L6-v2</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/chronic-care-rag" class="proj-btn btn-gh" target="_blank"><i
+                class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\leaf.png" alt="Leaf Health Semantic Segmentation Using Segformer">
+        </div>
+        <div class="project-body">
+          <div class="project-name">Leaf Health Semantic Segmentation Using Segformer</div>
+          <div class="project-desc">Built a transformer-based semantic segmentation pipeline using SegFormer-B0 for
+            pixel-level leaf health classification, designing an end-to-end training workflow with preprocessing,
+            augmentation, hyperparameter tuning, and CE + Dice fine-tuning to improve IoU from ~0.30 to 0.83+, while
+            delivering quantitative (IoU, confusion matrix) and qualitative results that significantly enhanced
+            minority-class performance.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">HuggingFace (SegFormer-B0)</span>
+            <span class="tag">Albumentations</span>
+            <span class="tag">CVAT</span>
+            <span class="tag">Pytorch</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/leaf-health-semantic-segmentation-using-segformer"
+              class="proj-btn btn-gh" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\fifa.png" alt="FIFA Analytics Data Warehouse & Power BI Dashboard">
+        </div>
+        <div class="project-body">
+          <div class="project-name">⚽ FIFA Analytics Data Warehouse & Power BI Dashboard</div>
+          <div class="project-desc">Designed and implemented structured ETL pipelines for 200k+ records with data
+            cleaning and validation checks, developed analytical dashboards for enterprise-style reporting, and
+            delivered stakeholder-ready documentation and presentations translating technical findings into actionable
+            business insights.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/Fifa-Analytics-Data-Warehouse-Power-BI-Dashboard"
+              class="proj-btn btn-gh" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://drive.google.com/file/d/1scgbGoe3W2zJA5obM0uVZ1NOVwU6e2QT/view?usp=sharing"
+              class="proj-btn btn-demo" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              Dashboard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\chicago.jpg" alt="Chicago Crime Intelligence Dashboard (2021–2025)">
+        </div>
+        <div class="project-body">
+          <div class="project-name">📊 Chicago Crime Intelligence Dashboard (2021–2025)</div>
+          <div class="project-desc">Conducted large-scale data analysis on 1M+ records using SQL to support data-driven
+            decision making in public administration contexts and delivered dashboards and presentations translating
+            complex data into actionable insights to support operational efficiency and strategic vision.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/Chicago-Crime-Intelligence-Dashboard" class="proj-btn btn-gh"
+              target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://drive.google.com/file/d/1_0d2JK8TvsINF-Xz8KD1S2E-DSH_hUBp/view" class="proj-btn btn-demo"
+              target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Dashboard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\creditcard.png" alt="Credit Card Spend Revenue Analysis (2019-2020)">
+        </div>
+        <div class="project-body">
+          <div class="project-name">Credit Card Spend Revenue Analysis (2019-2020)</div>
+          <div class="project-desc">Analyzed 1.28M credit card transactions using Python, SQL, Excel, and Power BI to
+            uncover revenue drivers, customer spending patterns, and seasonal trends — delivering an executive-ready
+            3-page interactive dashboard simulating analyst workflows at JPMorgan Chase.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/vtooooooo/credit-card-spend-revenue-analysis" class="proj-btn btn-gh"
+              target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://drive.google.com/file/d/1aRE6BJl1eZ8YP0fmlybLDy9qj7_WP4kV/view?usp=drive_link"
+              class="proj-btn btn-demo" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              Dashboard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="project-card from-left" data-direction="left">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\sap.png" alt="SAP ABAP Inventory & Vendor Projects">
+        </div>
+        <div class="project-body">
+          <div class="project-name">SAP ABAP Inventory & Vendor Projects</div>
+          <div class="project-desc">Supported procurement and inventory business processes by developing ALV reports and
+            SmartForms to document business processes and improve maintenance planning, assisted with data validation,
+            vendor vetting, list configuration, and documentation to enhance reporting accuracy by 25% and ensure strong
+            data integrity, and gained hands-on exposure to SAP ABAP modules, functional workflows, and enterprise data
+            structures supporting effective data management.</div>
+          <div class="project-tags">
+            <span class="tag">SmartForms</span>
+            <span class="tag">ALV Reports</span>
+            <span class="tag">ERP Data Management</span>
+            <span class="tag">SAP ABAP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 8 -->
+      <div class="project-card from-left" data-direction="left">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\unh.png" alt="MarketMindz">
+        </div>
+        <div class="project-body">
+          <div class="project-name">MarketMindz</div>
+          <div class="project-desc">A university research project analyzing multi-platform digital marketing data
+            (LinkedIn, Google, Meta) for graduate program recruitment, leveraging data analytics and AWS cloud
+            infrastructure to evaluate campaign performance metrics like CTR and conversion rates.</div>
+          <div class="project-tags">
+            <span class="tag">AWS S3</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Uvicorn</span>
+            <span class="tag">Python</span>
+            <span class="tag">NLTK</span>
+            <span class="tag">Regression & Classification Models</span>
+          </div>
+          <div class="project-desc">Coming Soon</div>
+        </div>
+      </div>
+
+      <!-- Project 9 -->
+      <div class="project-card from-right" data-direction="right">
+        <div class="project-visual" style="background: var(--card-bg);">
+          <img src="images\projects\india.png"
+            alt="Namma Nadu: A Knowledge-Grounded LLM for India's Civilizational Memory">
+        </div>
+        <div class="project-body">
+          <div class="project-name">Namma Nadu: A Knowledge-Grounded LLM for India's Civilizational Memory</div>
+          <div class="project-desc">Developing a culturally-grounded LLM for Indian historical and cultural reasoning,
+            combining a state-wise knowledge graph, RAG architecture, and multilingual fine-tuning across India's 28
+            states, dynasties, oral traditions, and heritage — addressing critical gaps in existing AI models' cultural
+            depth and regional coverage</div>
+          <div class="project-tags">
+            <span class="tag">Llama3</span>
+            <span class="tag">QLoRA</span>
+            <span class="tag">Neo4j</span>
+            <span class="tag">LangChain</span>
+            <span class="tag">Python</span>
+            <span class="tag">IndicBERT</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Streamlit</span>
+          </div>
+          <div class="project-desc">Coming Soon</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Vittu Ramadasu Darshan</div>
+    <nav class="footer-nav">
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="footer-social">
+      <span
+        style="color:var(--text-secondary);font-size:.85rem;font-weight:600;align-self:center;margin-right:4px">Connect</span>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i
+          class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/vtooooooo" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // ── THEME ──
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon(next);
+    });
+
+    function updateIcon(theme) {
+      themeIcon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
+
+    // ── HAMBURGER ──
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburgerBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+
+    // ── PROJECT SCROLL ANIMATION ──
+    const cards = document.querySelectorAll('.project-card');
+    const projectObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          projectObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    cards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.08}s`;
+      projectObserver.observe(card);
+    });
+  </script>
+</body>
+
+</html>

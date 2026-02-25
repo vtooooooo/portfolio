@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vittu Ramadasu Darshan — Data & Systems Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f8f9fc;
+      --card-bg: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #4f46e5;
+      --accent-2: #0ea5e9;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 8px 40px rgba(15, 23, 42, 0.12);
+      --transition: 0.35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0f1e;
+      --bg-alt: #0d1424;
+      --card-bg: #111827;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #1e293b;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(10, 15, 30, 0.88);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.07);
+    }
+
+    .nav-resume {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff !important;
+      padding: 7px 18px !important;
+      border-radius: 999px !important;
+      font-weight: 600 !important;
+    }
+
+    .nav-resume:hover {
+      opacity: 0.88;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      margin-left: 8px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      padding: 4px;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 5%;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 999;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.07);
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      padding-top: 68px;
+    }
+
+    section {
+      padding: 100px 5%;
+    }
+
+    section:nth-child(even) {
+      background: var(--bg-alt);
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding-top: 120px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .photo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .photo-frame {
+      width: 260px;
+      height: 320px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      padding: 3px;
+      position: relative;
+      animation: borderPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes borderPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 20px 6px rgba(79, 70, 229, 0.2);
+      }
+    }
+
+    .photo-frame img,
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-alt);
+    }
+
+    .photo-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: var(--bg-alt);
+    }
+
+    .social-btns {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-linkedin {
+      background: #0077b5;
+      color: #fff;
+    }
+
+    .btn-github {
+      background: #24292e;
+      color: #fff;
+    }
+
+    [data-theme="dark"] .btn-github {
+      background: #30363d;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .about-name {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-sub {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .about-bio {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .about-bio p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+
+    /* ── SKILLS TAPE ── */
+    .tape-section {
+      padding: 40px 0;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tape-section::before,
+    .tape-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .tape-section::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-alt), transparent);
+    }
+
+    .tape-section::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-alt), transparent);
+    }
+
+    .tape-track {
+      display: flex;
+      gap: 32px;
+      animation: scroll-tape 35s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes scroll-tape {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .tape-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .tape-item:hover {
+      opacity: 1;
+    }
+
+    .tape-item img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .tape-item .emoji {
+      font-size: 1.1rem;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tab-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 40px;
+      background: var(--bg-alt);
+      padding: 5px;
+      border-radius: 12px;
+      width: fit-content;
+    }
+
+    .tab-btn {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.25s;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tab-panel.active {
+      display: flex;
+    }
+
+    .exp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .exp-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .exp-card-left {
+      flex: 1;
+    }
+
+    .exp-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .exp-org {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-date {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .exp-arrow {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-left: 16px;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      position: relative;
+      animation: modalIn 0.3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.93) translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--bg-alt);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    .modal-logo {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .modal-role {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .modal-org {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .modal-date {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .modal-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-bullets li {
+      display: flex;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .modal-bullets li::before {
+      content: '▸';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── SKILLS GRID ── */
+    #skills .section-header {
+      margin-bottom: 48px;
+    }
+
+    .skills-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .skill-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .skill-panel:hover {
+      border-color: rgba(79, 70, 229, 0.3);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .panel-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: default;
+      transition: all 0.25s;
+    }
+
+    .chip:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(79, 70, 229, 0.08);
+      box-shadow: 0 0 12px rgba(79, 70, 229, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .contact-info h3 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-info p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .contact-item i {
+      color: var(--accent);
+      width: 18px;
+      text-align: center;
+    }
+
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 7px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-alt);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 3000;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(.4, 0, .2, 1), opacity 0.35s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      background: #22c55e;
+    }
+
+    .toast.error {
+      background: #ef4444;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 48px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .footer-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .footer-social a {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      transition: color 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      grid-column: 1/-1;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .photo-col {
+        align-items: center;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .skills-panels {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-nav {
+        justify-content: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      section {
+        padding: 70px 5%;
+      }
+
+      .tab-switcher {
+        width: 100%;
+      }
+
+      .tab-btn {
+        flex: 1;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .about-name {
+        font-size: 1.8rem;
+      }
+
+      .photo-frame {
+        width: 200px;
+        height: 250px;
+      }
+
+      .exp-card {
+        padding: 16px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">Vittu Ramadasu Darshan</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="projects.html">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <!-- REPLACE: Update href to your resume PDF link -->
+      <a href="#" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
+          style="margin-right:6px;font-size:.8rem"></i>Resume</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-sun" id="themeIcon"></i>
+    </button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="projects.html">Projects</a>
+    <!-- REPLACE: Update href to your resume PDF link -->
+    <a href="#">Resume</a>
+  </div>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="photo-col fade-up">
+          <div class="photo-frame">
+            <!-- REPLACE: Add your actual portrait image -->
+            <img src="images\about\about.png" alt="Vittu Ramadasu Darshan">
+          </div>
+          <div class="social-btns">
+            <!-- REPLACE: Update LinkedIn URL to your actual profile -->
+            <a href="https://linkedin.com/in/vitturamadasudarshan" target="_blank" class="social-btn btn-linkedin">
+              <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+            </a>
+            <a href="https://github.com/vtooooooo" target="_blank" class="social-btn btn-github">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="about-text fade-up" style="transition-delay:0.15s">
+          <div class="eyebrow">Data & Systems Engineer</div>
+          <h1 class="about-name">Vittu Ramadasu Darshan</h1>
+          <div class="about-sub">Analytics · ERP Systems · Cloud Pipelines</div>
+          <div class="about-bio">
+            <p>I'm the kind of person who enjoys cleaning messy data, automating things that shouldn't be manual, and
+              making dashboards that actually answer questions (wild concept, I know).</p>
+            <p>Somewhere between writing SQL queries at 2 AM, building things in SAP that people swear are "impossible,"
+              and convincing data to tell a coherent story, I realized I like sitting at the intersection of analytics,
+              systems, and problem-solving. I've worked with everything from ERP workflows to cloud pipelines — mostly
+              trying to make systems smarter and people's lives easier.</p>
+            <p>When I'm not debugging or over-engineering solutions for fun, I'm probably thinking about how to make
+              data cleaner, processes smoother, and reports less painful to read.</p>
+            <h4>Welcome to the chaos 🚀</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS TAPE -->
+    <div class="tape-section">
+      <div class="tape-track" id="tapeTrack"></div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" style="background: var(--bg-alt);">
+      <div class="section-label fade-up">Background</div>
+      <h2 class="section-title fade-up" style="margin-bottom:40px">Experience & <span>Education</span></h2>
+      <div style="max-width:860px;margin:0 auto">
+        <div class="tab-switcher fade-up">
+          <button class="tab-btn active" data-tab="work">💼 Work Experience</button>
+          <button class="tab-btn" data-tab="edu">🎓 Education</button>
+        </div>
+
+        <!-- WORK -->
+        <div class="tab-panel active" id="tab-work">
+          <div class="exp-card fade-up" onclick="openModal('work0')">
+            <div class="exp-card-left">
+              <div class="exp-role">Workflow Automation Intern</div>
+              <div class="exp-org">GoGreenLocally.org — Las Vegas, NV</div>
+              <div class="exp-date">Jan 2026 – Present</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('work1')">
+            <div class="exp-card-left">
+              <div class="exp-role">Research Assistant</div>
+              <div class="exp-org">University of New Haven — West Haven, CT</div>
+              <div class="exp-date">Jan 2026 – Present</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('work4')">
+            <div class="exp-card-left">
+              <div class="exp-role">Runner-Up: 9th Cross Disciplinary Case Competition</div>
+              <div class="exp-org">University of New Haven</div>
+              <div class="exp-date">Oct 2025 – Nov 2025</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('work2')">
+            <div class="exp-card-left">
+              <div class="exp-role">Competitive Sports Assistant & Event Support Assistant & Student Worker @ Sodexo
+              </div>
+              <div class="exp-org">Sodexo — West Haven, CT</div>
+              <div class="exp-date">Apr 2025 – Present</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('work6')">
+            <div class="exp-card-left">
+              <div class="exp-role">Data Analyst Intern</div>
+              <div class="exp-org">OmanTel — Muscat, Oman</div>
+              <div class="exp-date">Nov 2022 – Nov 2023</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="tab-panel" id="tab-edu">
+          <div class="exp-card fade-up" onclick="openModal('edu0')">
+            <div class="exp-card-left">
+              <div class="exp-role">MS in Data Science</div>
+              <div class="exp-org">University of New Haven — West Haven, CT</div>
+              <!-- REPLACE: Add your actual GPA -->
+              <div class="exp-date">2024 – Present · GPA: [placeholder]</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('edu1')">
+            <div class="exp-card-left">
+              <div class="exp-role">B.Tech in AI & Data Science</div>
+              <div class="exp-org">Visvesvaraya Technological University — Karnataka, India</div>
+              <!-- REPLACE: Add your actual GPA -->
+              <div class="exp-date">2020 – 2024 · GPA: [placeholder]</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+          <div class="exp-card fade-up" onclick="openModal('edu2')">
+            <div class="exp-card-left">
+              <div class="exp-role">Indian School Certificate</div>
+              <div class="exp-org">Bishop Cotton Boys' School — Karnataka, India</div>
+              <div class="exp-date">2018 – 2020</div>
+            </div>
+            <div class="exp-arrow">View Details →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+      <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-logo" id="modalLogo"></div>
+        <div class="modal-role" id="modalRole"></div>
+        <div class="modal-org" id="modalOrg"></div>
+        <div class="modal-date" id="modalDate"></div>
+        <ul class="modal-bullets" id="modalBullets"></ul>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label fade-up">Toolkit</div>
+      <h2 class="section-title fade-up" style="margin-bottom:48px">Skills & <span>Technologies</span></h2>
+      <div class="skills-panels">
+        <div class="skill-panel fade-up">
+          <div class="panel-header">
+            <div class="panel-icon"><i class="fa-solid fa-code"></i></div>
+            Languages
+          </div>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">SQL</span>
+            <span class="chip">JavaScript</span><span class="chip">Node.js</span>
+            <span class="chip">Express.js</span><span class="chip">SAP ABAP</span>
+          </div>
+        </div>
+        <div class="skill-panel fade-up" style="transition-delay:0.1s">
+          <div class="panel-header">
+            <div class="panel-icon"><i class="fa-solid fa-brain"></i></div>
+            ML / AI
+          </div>
+          <div class="chips">
+            <span class="chip">Scikit-learn</span><span class="chip">TensorFlow</span>
+            <span class="chip">PyTorch</span><span class="chip">HuggingFace</span>
+            <span class="chip">OpenCV</span><span class="chip">LangChain</span>
+            <span class="chip">LlamaIndex</span><span class="chip">QLoRA</span>
+            <span class="chip">Neo4j</span><span class="chip">RAG</span>
+            <span class="chip">HuggingFace</span><span class="chip">Ollama</span>
+            <span class="chip">Claude</span>
+          </div>
+        </div>
+        <div class="skill-panel fade-up" style="transition-delay:0.2s">
+          <div class="panel-header">
+            <div class="panel-icon"><i class="fa-solid fa-chart-bar"></i></div>
+            Data & Visualization
+          </div>
+          <div class="chips">
+            <span class="chip">Pandas</span><span class="chip">NumPy</span>
+            <span class="chip">Matplotlib</span><span class="chip">Seaborn</span>
+            <span class="chip">Plotly</span><span class="chip">Tableau</span>
+            <span class="chip">Power BI</span><span class="chip">Excel</span>
+          </div>
+        </div>
+        <div class="skill-panel fade-up" style="transition-delay:0.3s">
+          <div class="panel-header">
+            <div class="panel-icon"><i class="fa-solid fa-wrench"></i></div>
+            Frameworks & Tools
+          </div>
+          <div class="chips">
+            <span class="chip">FastAPI</span>
+            <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+            <span class="chip">SAP HANA</span><span class="chip">SAP BTP</span>
+            <span class="chip">Zapier</span><span class="chip">HubSpot</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="background: var(--bg-alt);">
+      <div class="section-label fade-up">Get In Touch</div>
+      <h2 class="section-title fade-up" style="margin-bottom:56px">Let's <span>Connect</span></h2>
+      <div class="contact-grid">
+        <div class="contact-info fade-up">
+          <h3>Have a project in mind? <span>Let's talk.</span></h3>
+          <p>I'm always open to new opportunities, collaborations, and interesting conversations about data, systems, or
+            anything in between. Drop me a message!</p>
+          <!-- REPLACE: Replace with your actual email -->
+          <div class="contact-item"><i class="fa-solid fa-envelope"></i> <a
+              href="mailto:vdars1@unh.newhaven.edu">vdars1@unh.newhaven.edu</a></div>
+          <div class="contact-item"><i class="fa-solid fa-location-dot"></i> West Haven, CT</div>
+          <!-- REPLACE: Replace with your actual LinkedIn username -->
+          <div class="contact-item"><i class="fa-brands fa-linkedin"></i> <a
+              href="https://linkedin.com/in/vitturamadasudarshan"
+              target="_blank">linkedin.com/in/vitturamadasudarshan</a></div>
+        </div>
+        <div class="fade-up" style="transition-delay:0.15s">
+          <div class="contact-form-card">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="cfName">Name</label>
+                <input type="text" id="cfName" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="cfEmail">Email</label>
+                <input type="email" id="cfEmail" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="cfMsg">Message</label>
+                <textarea id="cfMsg" name="message" placeholder="Tell me what's on your mind..." required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">Send Message <i class="fa-solid fa-paper-plane"
+                  style="margin-left:8px"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Vittu Ramadasu Darshan</div>
+    <nav class="footer-nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="footer-social">
+      <span
+        style="color:var(--text-secondary);font-size:.85rem;font-weight:600;align-self:center;margin-right:4px">Connect</span>
+      <!-- REPLACE: Update LinkedIn URL -->
+      <a href="https://linkedin.com/in/vitturamadasudarshan" target="_blank" aria-label="LinkedIn"><i
+          class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/vtooooooo" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // ── THEME ──
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon(next);
+    });
+
+    function updateIcon(theme) {
+      themeIcon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
+
+    // ── HAMBURGER ──
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburgerBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+
+    // ── SKILLS TAPE ──
+    const skills = [
+      { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
+      { name: 'SQL', emoji: '🗄️' },
+      { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
+      { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
+      { name: 'Scikit-learn', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg' },
+      { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg' },
+      { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg' },
+      { name: 'HuggingFace', emoji: '🤗' },
+      { name: 'Pandas', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg' },
+      { name: 'NumPy', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg' },
+      { name: 'Tableau', emoji: '📊' },
+      { name: 'Power BI', emoji: '📈' },
+      { name: 'Plotly', emoji: '📉' },
+      { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg' },
+      { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg' },
+      { name: 'Streamlit', emoji: '🎈' },
+      { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
+      { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
+      { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
+      { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg' },
+      { name: 'SAP ABAP', icon: 'https://s.yimg.com/zb/imgv1/6e8c6d39-2d7c-3571-9ded-009ced31f439/t_500x300' },
+      { name: 'S4 HANA', icon: 'https://s.yimg.com/zb/imgv1/6e8c6d39-2d7c-3571-9ded-009ced31f439/t_500x300' },
+      { name: 'SAP BTP', icon: 'https://s.yimg.com/zb/imgv1/6e8c6d39-2d7c-3571-9ded-009ced31f439/t_500x300' },
+      { name: 'SAP CAPM', icon: 'https://s.yimg.com/zb/imgv1/6e8c6d39-2d7c-3571-9ded-009ced31f439/t_500x300' },
+      { name: 'SAP Fiori', icon: 'https://s.yimg.com/zb/imgv1/6e8c6d39-2d7c-3571-9ded-009ced31f439/t_500x300' }
+
+    ];
+    function createItem(s) {
+      const el = document.createElement('div');
+      el.className = 'tape-item';
+      if (s.icon) el.innerHTML = `<img src="${s.icon}" alt="${s.name}" onerror="this.style.display='none'"><span>${s.name}</span>`;
+      else el.innerHTML = `<span class="emoji">${s.emoji}</span><span>${s.name}</span>`;
+      return el;
+    }
+    const track = document.getElementById('tapeTrack');
+    [...skills, ...skills].forEach(s => track.appendChild(createItem(s)));
+
+    // ── TABS ──
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ── MODAL DATA ──
+    const modalData = {
+      work0: {
+        logo: '🌿', role: 'Workflow Automation Intern', org: 'GoGreenLocally.org', date: 'Jan 2026 – Present · Las Vegas, NV',
+        bullets: [
+          'Supported IT and technical support operations by developing and maintaining workflow automation and data pipelines, troubleshooting data and system issues, validating multi - source community datasets across 60 + local hubs, and improving operational efficiency and analytics - enabled digital platforms.',
+        ]
+      },
+      work1: {
+        logo: '🔬', role: 'Research Assistant', org: 'University of New Haven', date: 'Jan 2026 – Present · West Haven, CT',
+        bullets: [
+          'Contribute to MarketMindz, a data analytics project analyzing university marketing performance across LinkedIn, Google, and Meta; responsible for validating models on MS in AI recruitment data, leading AWS deployment, and co- authoring a research paper for conference publication.',
+        ]
+      },
+      work2: {
+        logo: '⚽🎪🍽️', role: 'Competitive Sports Assistant & Event Support Assistant & Student Worker @ Sodexo', org: 'University of New Haven', date: 'Apr 2025 – Present · West Haven, CT',
+        bullets: [
+          // REPLACE: Add real bullet points for this role
+          'Supported general administrative and project activities within technology-enabled environments, troubleshooting internal systems and maintaining accurate records and files in a paperless environment demonstrating personal accountability by working independently to ensure data integrity and documentation for workforce planning.',
+          'Managed high-volume food service operations serving 300+ customers per shift while maintaining strict food safety and service quality standards, and coordinated inventory management and cash reconciliation processes to ensure zero discrepancies in daily financial close-outs.',
+          'Coordinated floor setup logistics for university-scale events hosting 200+ attendees, executing operational plans within strict 2-hour setup windows and adapting workflows in real time to accommodate last-minute layout changes while maintaining zero disruptions across 15+ events.'
+        ]
+      },
+      work3: {
+        logo: '', role: 'Event Support Assistant', org: 'University of New Haven', date: 'Nov 2025 – Present · West Haven, CT',
+        bullets: [
+          // REPLACE: Add real bullet points for this role
+          '',
+        ]
+      },
+      work4: {
+        logo: '🏆', role: 'Runner-Up: 9th Cross Disciplinary Case Competition', org: 'University of New Haven', date: 'Oct 2025 – Nov 2025',
+        bullets: [
+          // REPLACE: Add details about the case competition
+          'Led a cross-functional team through business case analysis, needs assessment, and requirement gathering, defining business requirements while applying structured project management and stakeholder management practices and managing project timelines.',
+        ]
+      },
+      work5: {
+        logo: '', role: 'Competitive Sports Assistant', org: 'University of New Haven', date: 'Apr 2025 – Present · West Haven, CT',
+        bullets: [
+          // REPLACE: Add real bullet points for this role
+          'Supported general administrative and project activities within technology-enabled environments, troubleshooting internal systems and maintaining accurate records and files in a paperless environment demonstrating personal accountability by working independently to ensure data integrity and documentation for workforce planning.',
+        ]
+      },
+      work6: {
+        logo: '📡', role: 'Data Analyst Intern', org: 'OmanTel', date: 'Nov 2022 – Nov 2023 · Muscat, Oman',
+        bullets: [
+          // REPLACE: Add real bullet points for this role
+          'Designed 8+ interactive Power BI dashboards and automated SQL-based ETL pipelines supporting enterprise internal systems, enabling systems integration and data flow across the analytics value chain translating business requirements into KPI - driven insights supporting market analysis and data - informed decision - making for finance and marketing stakeholders by conducting impact analysis on reporting workflows.Improved forecasting accuracy by 22%, reduced manual processing time from 4 hours to under 1 hour, strengthened internal controls, and accelerated quarterly financial reporting turnaround by 30%.',
+        ]
+      },
+      edu0: {
+        logo: '🎓', role: 'Master of Science in Data Science', org: 'University of New Haven', date: 'Aug 2024 – Present · West Haven, CT',
+        bullets: [
+          // REPLACE: Add real coursework or highlights
+          'GPA: 3.58/4.0',
+          'Relevant Coursework: Machine Learning, NLP, Data Engineering, Deep Learning, Power BI, Intro to AI.', 'Clubs & Activities: Data Science Club'
+        ]
+      },
+      edu1: {
+        logo: '🏛️', role: 'B.Tech in Artificial Intelligence & Data Science', org: 'Visvesvaraya Technological University', date: '2021 – 2024 · Karnataka, India',
+        bullets: [
+          // REPLACE: Add real coursework or highlights
+          'GPA: 2.9/4.0',
+          'Relevant Coursework: Intro to AI, C Programming, Data Structures, Database Management, Machine Learning, Business Intelligence',
+          'Clubs & Activities: Organized AI Hackathon, Organized SRISHTI - A national level Tech Fest',
+        ]
+      },
+      edu2: {
+        logo: '📚', role: 'Indian School Certificate (ISC)', org: "Bishop Cotton Boys' School", date: '2018 – 2020 · Karnataka, India',
+        bullets: [
+          // REPLACE: Add subjects or notable achievements
+          'Completed ISC with focus on Science and Mathematics.',
+          'Organized SYNCHRONIZE - The biggest Science & IT Fest in India'
+        ]
+      },
+    };
+
+    function openModal(key) {
+      const d = modalData[key];
+      if (!d) return;
+      document.getElementById('modalLogo').textContent = d.logo;
+      document.getElementById('modalRole').textContent = d.role;
+      document.getElementById('modalOrg').textContent = d.org;
+      document.getElementById('modalDate').textContent = d.date;
+      const ul = document.getElementById('modalBullets');
+      ul.innerHTML = d.bullets.map(b => `<li>${b}</li>`).join('');
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeModalOnBg(e) {
+      if (e.target.id === 'modalOverlay') closeModal();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ── INTERSECTION OBSERVER ──
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // ── CONTACT FORM (EmailJS) ──
+    // REPLACE: Initialize EmailJS with your public key
+    emailjs.init("cdr5LLN-XfZV3M19r");
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      // REPLACE: Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with actual values from EmailJS
+      const params = {
+        name: document.getElementById('cfName').value,
+        email: document.getElementById('cfEmail').value,
+        message: document.getElementById('cfMsg').value,
+      };
+
+      // Uncomment and configure with real EmailJS credentials:
+
+      emailjs.send("service_ukxowb4", "service_ukxowb4", params)
+        .then(() => {
+          showToast('Message sent! I\'ll be in touch soon. ✨', 'success');
+          this.reset();
+        })
+        .catch(() => showToast('Something went wrong. Please try again.', 'error'))
+        .finally(() => { btn.textContent = 'Send Message'; btn.disabled = false; });
+    });
+
+    function showToast(msg, type) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = `toast ${type} show`;
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+  </script>
+</body>
+
+</html>
