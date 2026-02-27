@@ -239,16 +239,14 @@
     /* ── PROJECTS ── */
     .projects-section {
       padding: 80px 5% 120px;
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
     }
 
     .project-card {
-      display: grid;
-      grid-template-columns: 340px 1fr;
+      display: flex;
+      flex-direction: column;
       border-radius: 24px;
       overflow: hidden;
       background: var(--card-bg);
@@ -266,16 +264,16 @@
     }
 
     .project-card.from-left {
-      transform: translateX(-60px);
+      transform: translateY(40px);
     }
 
     .project-card.from-right {
-      transform: translateX(60px);
+      transform: translateY(40px);
     }
 
     .project-card.visible {
       opacity: 1;
-      transform: translateX(0) translateY(0) !important;
+      transform: translateY(0) !important;
       transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1), border-color 0.3s, box-shadow 0.3s;
     }
 
@@ -283,26 +281,11 @@
       transform: translateY(-4px) !important;
     }
 
-    .project-visual {
-      position: relative;
-      min-height: 260px;
-      overflow: hidden;
-    }
-
-    .project-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      position: absolute;
-      inset: 0;
-      display: block;
-    }
-
     .project-body {
-      padding: 36px 40px;
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      flex: 1;
     }
 
     .project-name {
@@ -446,12 +429,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .project-card {
+      .projects-section {
         grid-template-columns: 1fr;
-      }
-
-      .project-visual {
-        min-height: 200px;
       }
 
       footer {
@@ -479,11 +458,11 @@
 
       .projects-section {
         padding: 60px 5% 80px;
-        gap: 32px;
+        gap: 24px;
       }
 
       .project-body {
-        padding: 24px 24px;
+        padding: 20px 24px;
       }
     }
 
@@ -514,7 +493,7 @@
       <a href="projects.html" class="active">Projects</a>
       <a href="index.html#skills">Skills</a>
       <a href="index.html#contact">Contact</a>
-      <a href="https://drive.google.com/file/d/1InjKmHiTsOkvUe1UVuPldtDoSCEF8P9N/view?usp=sharing" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
+      <a href="#" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
           style="margin-right:6px;font-size:.8rem"></i>Resume</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -532,7 +511,7 @@
     <a href="index.html#skills">Skills</a>
     <a href="index.html#contact">Contact</a>
     <a href="projects.html" class="active">Projects</a>
-    <a href="https://drive.google.com/file/d/1InjKmHiTsOkvUe1UVuPldtDoSCEF8P9N/view?usp=sharing">Resume</a>
+    <a href="#">Resume</a>
   </div>
 
   <!-- HERO -->
@@ -549,10 +528,6 @@
 
       <!-- Project 1 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\hospital.png"
-            alt="Automated Real Time Hospital Patient Data Analytics Platform on AWS">
-        </div>
         <div class="project-body">
           <div class="project-name">Automated Real Time Hospital Patient Data Analytics Platform on AWS</div>
           <div class="project-desc">Developed automated ETL workflows within cloud-based internal systems using
@@ -575,9 +550,6 @@
 
       <!-- Project 2 -->
       <div class="project-card from-left" data-direction="left">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\rag.png" alt="Chronic Care RAG: Diabetes & Hypertension Question Answering">
-        </div>
         <div class="project-body">
           <div class="project-name">🩺 Chronic Care RAG: Diabetes & Hypertension Question Answering</div>
           <div class="project-desc">Built a Retrieval-Augmented Generation (RAG) medical QA system using MiniLM
@@ -600,9 +572,6 @@
 
       <!-- Project 3 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\leaf.png" alt="Leaf Health Semantic Segmentation Using Segformer">
-        </div>
         <div class="project-body">
           <div class="project-name">Leaf Health Semantic Segmentation Using Segformer</div>
           <div class="project-desc">Built a transformer-based semantic segmentation pipeline using SegFormer-B0 for
@@ -626,9 +595,6 @@
 
       <!-- Project 4 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\fifa.png" alt="FIFA Analytics Data Warehouse & Power BI Dashboard">
-        </div>
         <div class="project-body">
           <div class="project-name">⚽ FIFA Analytics Data Warehouse & Power BI Dashboard</div>
           <div class="project-desc">Designed and implemented structured ETL pipelines for 200k+ records with data
@@ -653,9 +619,6 @@
 
       <!-- Project 5 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\chicago.jpg" alt="Chicago Crime Intelligence Dashboard (2021–2025)">
-        </div>
         <div class="project-body">
           <div class="project-name">📊 Chicago Crime Intelligence Dashboard (2021–2025)</div>
           <div class="project-desc">Conducted large-scale data analysis on 1M+ records using SQL to support data-driven
@@ -678,9 +641,6 @@
 
       <!-- Project 6 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\creditcard.png" alt="Credit Card Spend Revenue Analysis (2019-2020)">
-        </div>
         <div class="project-body">
           <div class="project-name">Credit Card Spend Revenue Analysis (2019-2020)</div>
           <div class="project-desc">Analyzed 1.28M credit card transactions using Python, SQL, Excel, and Power BI to
@@ -704,9 +664,6 @@
 
       <!-- Project 7 -->
       <div class="project-card from-left" data-direction="left">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\sap.png" alt="SAP ABAP Inventory & Vendor Projects">
-        </div>
         <div class="project-body">
           <div class="project-name">SAP ABAP Inventory & Vendor Projects</div>
           <div class="project-desc">Supported procurement and inventory business processes by developing ALV reports and
@@ -725,9 +682,6 @@
 
       <!-- Project 8 -->
       <div class="project-card from-left" data-direction="left">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\unh.png" alt="MarketMindz">
-        </div>
         <div class="project-body">
           <div class="project-name">MarketMindz</div>
           <div class="project-desc">A university research project analyzing multi-platform digital marketing data
@@ -747,10 +701,6 @@
 
       <!-- Project 9 -->
       <div class="project-card from-right" data-direction="right">
-        <div class="project-visual" style="background: var(--card-bg);">
-          <img src="images\india.png"
-            alt="Namma Nadu: A Knowledge-Grounded LLM for India's Civilizational Memory">
-        </div>
         <div class="project-body">
           <div class="project-name">Namma Nadu: A Knowledge-Grounded LLM for India's Civilizational Memory</div>
           <div class="project-desc">Developing a culturally-grounded LLM for Indian historical and cultural reasoning,
