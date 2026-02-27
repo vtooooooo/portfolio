@@ -144,6 +144,30 @@
       color: var(--accent);
     }
 
+    .music-toggle {
+      position: relative;
+    }
+
+    .music-toggle.playing {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .music-toggle.playing::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      opacity: 0.4;
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.18); opacity: 0; }
+    }
+
     .hamburger {
       display: none;
       background: none;
@@ -1039,9 +1063,12 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
       <!-- REPLACE: Update href to your resume PDF link -->
-      <a href="https://drive.google.com/file/d/1InjKmHiTsOkvUe1UVuPldtDoSCEF8P9N/view?usp=sharing" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
+      <a href="#" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
           style="margin-right:6px;font-size:.8rem"></i>Resume</a>
     </nav>
+    <button class="theme-toggle music-toggle" id="musicToggle" aria-label="Toggle music">
+      <i class="fa-solid fa-volume-xmark" id="musicIcon"></i>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <i class="fa-solid fa-sun" id="themeIcon"></i>
     </button>
@@ -1058,7 +1085,7 @@
     <a href="#contact">Contact</a>
     <a href="projects.html">Projects</a>
     <!-- REPLACE: Update href to your resume PDF link -->
-    <a href="https://drive.google.com/file/d/1InjKmHiTsOkvUe1UVuPldtDoSCEF8P9N/view?usp=sharing">Resume</a>
+    <a href="#">Resume</a>
   </div>
 
   <main>
@@ -1069,7 +1096,7 @@
         <div class="photo-col fade-up">
           <div class="photo-frame">
             <!-- REPLACE: Add your actual portrait image -->
-            <img src="images\about.png" alt="Vittu Ramadasu Darshan">
+            <img src="images\about\about.png" alt="Vittu Ramadasu Darshan">
           </div>
           <div class="social-btns">
             <!-- REPLACE: Update LinkedIn URL to your actual profile -->
@@ -1167,7 +1194,7 @@
               <div class="exp-role">MS in Data Science</div>
               <div class="exp-org">University of New Haven — West Haven, CT</div>
               <!-- REPLACE: Add your actual GPA -->
-              <div class="exp-date">2024 – Present · GPA: 3.58/4.0</div>
+              <div class="exp-date">2024 – Present · GPA: [placeholder]</div>
             </div>
             <div class="exp-arrow">View Details →</div>
           </div>
@@ -1176,7 +1203,7 @@
               <div class="exp-role">B.Tech in AI & Data Science</div>
               <div class="exp-org">Visvesvaraya Technological University — Karnataka, India</div>
               <!-- REPLACE: Add your actual GPA -->
-              <div class="exp-date">2020 – 2024 · GPA: 2.9/4.0</div>
+              <div class="exp-date">2020 – 2024 · GPA: [placeholder]</div>
             </div>
             <div class="exp-arrow">View Details →</div>
           </div>
@@ -1328,6 +1355,11 @@
     </div>
   </footer>
 
+  <audio id="bgMusic" loop>
+    <source src="audio/background.mp3" type="audio/mpeg">
+    <source src="audio/background.ogg" type="audio/ogg">
+  </audio>
+
   <script>
     // ── THEME ──
     const html = document.documentElement;
@@ -1357,6 +1389,50 @@
     });
     mobileNav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+
+    // ── MUSIC ──
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+
+    bgMusic.volume = 0.3;
+
+    const savedTime = sessionStorage.getItem('musicTime');
+    const musicPlaying = localStorage.getItem('musicPlaying') === 'true';
+
+    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+
+    function setMusicIcon(playing) {
+      musicIcon.className = playing ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+      musicToggle.classList.toggle('playing', playing);
+    }
+
+    if (musicPlaying) {
+      bgMusic.play().then(() => setMusicIcon(true)).catch(() => {
+        const resume = () => {
+          bgMusic.play().then(() => setMusicIcon(true));
+          document.removeEventListener('click', resume);
+        };
+        document.addEventListener('click', resume);
+      });
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+          localStorage.setItem('musicPlaying', 'true');
+          setMusicIcon(true);
+        });
+      } else {
+        bgMusic.pause();
+        localStorage.setItem('musicPlaying', 'false');
+        setMusicIcon(false);
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('musicTime', bgMusic.currentTime);
     });
 
     // ── SKILLS TAPE ──
