@@ -148,6 +148,30 @@
       color: var(--accent);
     }
 
+    .music-toggle {
+      position: relative;
+    }
+
+    .music-toggle.playing {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .music-toggle.playing::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      opacity: 0.4;
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.18); opacity: 0; }
+    }
+
     .hamburger {
       display: none;
       background: none;
@@ -496,6 +520,9 @@
       <a href="#" class="nav-resume"><i class="fa-solid fa-file-arrow-down"
           style="margin-right:6px;font-size:.8rem"></i>Resume</a>
     </nav>
+    <button class="theme-toggle music-toggle" id="musicToggle" aria-label="Toggle music">
+      <i class="fa-solid fa-volume-xmark" id="musicIcon"></i>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <i class="fa-solid fa-sun" id="themeIcon"></i>
     </button>
@@ -743,6 +770,11 @@
     </div>
   </footer>
 
+  <audio id="bgMusic" loop>
+    <source src="audio/background.mp3" type="audio/mpeg">
+    <source src="audio/background.ogg" type="audio/ogg">
+  </audio>
+
   <script>
     // ── THEME ──
     const html = document.documentElement;
@@ -768,6 +800,50 @@
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileNav = document.getElementById('mobileNav');
     hamburgerBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+
+    // ── MUSIC ──
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+
+    bgMusic.volume = 0.3;
+
+    const savedTime = sessionStorage.getItem('musicTime');
+    const musicPlaying = localStorage.getItem('musicPlaying') === 'true';
+
+    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+
+    function setMusicIcon(playing) {
+      musicIcon.className = playing ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+      musicToggle.classList.toggle('playing', playing);
+    }
+
+    if (musicPlaying) {
+      bgMusic.play().then(() => setMusicIcon(true)).catch(() => {
+        const resume = () => {
+          bgMusic.play().then(() => setMusicIcon(true));
+          document.removeEventListener('click', resume);
+        };
+        document.addEventListener('click', resume);
+      });
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+          localStorage.setItem('musicPlaying', 'true');
+          setMusicIcon(true);
+        });
+      } else {
+        bgMusic.pause();
+        localStorage.setItem('musicPlaying', 'false');
+        setMusicIcon(false);
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('musicTime', bgMusic.currentTime);
+    });
 
     // ── PROJECT SCROLL ANIMATION ──
     const cards = document.querySelectorAll('.project-card');
